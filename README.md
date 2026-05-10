@@ -65,7 +65,8 @@ An AI-powered Notebook application where users can upload PDF or CSV files and c
 
 # 📂 Project Structure
 
-`My-notebook-LLM/
+```
+My-notebook-LLM/
 │
 ├── backend/
 │   ├── uploads/
@@ -86,7 +87,7 @@ An AI-powered Notebook application where users can upload PDF or CSV files and c
 │   └── .env
 │
 └── docker-compose.yml
-`
+```
 
 ---
 
@@ -94,17 +95,17 @@ An AI-powered Notebook application where users can upload PDF or CSV files and c
 
 ## Backend .env
 
-\`\`\`env
+```env
 OPENROUTER_API_KEY=your_api_key
 QDRANT_URL=your_qdrant_url
 QDRANT_API_KEY=your_qdrant_api_key
-\`\`\`
+```
 
 ## Frontend .env
 
-\`\`\`env
+```env
 VITE_BACKEND_URL=https://your-backend-url.onrender.com
-\`\`\`
+```
 
 ---
 
@@ -112,9 +113,9 @@ VITE_BACKEND_URL=https://your-backend-url.onrender.com
 
 ## 1. Clone Repository
 
-\`\`\`bash
+```
 git clone YOUR_GITHUB_REPOSITORY_URL
-\`\`\`
+```
 
 ---
 
@@ -122,43 +123,43 @@ git clone YOUR_GITHUB_REPOSITORY_URL
 
 ### Frontend
 
-\`\`\`bash
+```bash
 cd frontend
 npm install
-\`\`\`
+```
 
 ### Backend
 
-\`\`\`bash
+```bash
 cd backend
 npm install --legacy-peer-deps
-\`\`\`
+```
 
 ---
 
 ## 3. Start Qdrant with Docker
 
-\`\`\`bash
+```bash
 docker compose up -d
-\`\`\`
+```
 
 ---
 
 ## 4. Run Backend
 
-\`\`\`bash
+```bash
 cd backend
 node server.js
-\`\`\`
+```
 
 ---
 
 ## 5. Run Frontend
 
-\`\`\`bash
+```bash
 cd frontend
 npm run dev
-\`\`\`
+```
 
 ---
 
@@ -179,9 +180,9 @@ npm run dev
 
 ## Upload File
 
-\`\`\`http
+```http
 POST /upload
-\`\`\`
+```
 
 ### Form Data
 - file
@@ -191,26 +192,26 @@ POST /upload
 
 ## Chat with Document
 
-\`\`\`http
+```http
 POST /chat
-\`\`\`
+```
 
 ### Body
 
-\`\`\`json
+```json
 {
   "query": "your question",
   "notebookId": "notebook-id"
 }
-\`\`\`
+```
 
 ---
 
 ## Delete Notebook
 
-\`\`\`http
+```http
 DELETE /notebook/:id
-\`\`\`
+```
 
 ---
 
