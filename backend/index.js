@@ -90,7 +90,8 @@ async function indexingPDF(filePath, notebookId) {
   //    });
 
   const vectoreStore = await QdrantVectorStore.fromDocuments(docs, embeddings, {
-    url: "http://localhost:6333",
+    url: process.env.QDRANT_URL,
+    apiKey: process.env.QDRANT_API_KEY, 
     collectionName: notebookId,
     // collectionName: "NOTEBOOK-DATA",
   });
@@ -112,7 +113,8 @@ async function indexingPDF(filePath, notebookId) {
       docs,
       embeddings,
       {
-        url: "http://localhost:6333",
+        url: process.env.QDRANT_URL,
+      apiKey: process.env.QDRANT_API_KEY,
         collectionName: notebookId,
         // collectionName: "NOTEBOOK-DATA",
       },
@@ -130,7 +132,8 @@ async function retrieval(userQuery, notebookId) {
   const vectoreStore = await QdrantVectorStore.fromExistingCollection(
     embeddings,
     {
-      url: "http://localhost:6333",
+      url: process.env.QDRANT_URL,
+      apiKey: process.env.QDRANT_API_KEY,
       collectionName: notebookId,
       // collectionName: "NOTEBOOK-DATA",
     },
