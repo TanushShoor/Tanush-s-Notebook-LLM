@@ -45,7 +45,7 @@ let currentFileType = "";
 
 app.post("/upload", upload.single("file"), async (req, res) => {
 
-  console.log("UPLOAD HIT")
+  console.log("UPLOAD HIT");
 
   try {
 
@@ -135,8 +135,8 @@ app.post("/chat", async (req, res) => {
 
 // ---------------- SERVER ----------------
 
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
+app.listen(process.env.PORT || 3000,  () => {
+  console.log("Server running");
 });
 
 

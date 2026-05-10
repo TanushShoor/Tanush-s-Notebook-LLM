@@ -93,7 +93,6 @@ async function indexingPDF(filePath, notebookId) {
     url: process.env.QDRANT_URL,
     apiKey: process.env.QDRANT_API_KEY, 
     collectionName: notebookId,
-    // collectionName: "NOTEBOOK-DATA",
   });
 
   console.log("Indexeding Completed");
@@ -114,9 +113,8 @@ async function indexingPDF(filePath, notebookId) {
       embeddings,
       {
         url: process.env.QDRANT_URL,
-      apiKey: process.env.QDRANT_API_KEY,
+        apiKey: process.env.QDRANT_API_KEY,
         collectionName: notebookId,
-        // collectionName: "NOTEBOOK-DATA",
       },
     );
 
@@ -135,7 +133,6 @@ async function retrieval(userQuery, notebookId) {
       url: process.env.QDRANT_URL,
       apiKey: process.env.QDRANT_API_KEY,
       collectionName: notebookId,
-      // collectionName: "NOTEBOOK-DATA",
     },
   );
 
@@ -148,7 +145,7 @@ async function retrieval(userQuery, notebookId) {
   //   const client = new OpenAI();
   const context = searchedChunks.map((doc) => doc.pageContent).join("\n\n");
 
-  const system_prompt = `You are an AI Assistant who answers questions ONLY from the provided CSV dataset context.
+  const system_prompt = `You are an AI Assistant who answers questions ONLY from the provided PDF/CSV dataset context.
 
         Rules:
         - Only answer using the provided context.
