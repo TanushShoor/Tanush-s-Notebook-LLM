@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import fs from "fs";
 import multer from "multer";
 import path from "path";
 import { QdrantClient } from "@qdrant/js-client-rest";
@@ -9,6 +10,11 @@ import {
   indexCSV,
   retrieval
 } from "./index.js";
+
+app.use(express.json());
+if (!fs.existsSync("uploads")) {
+  fs.mkdirSync("uploads");
+}
 
 const app = express();
 
