@@ -65,8 +65,7 @@ An AI-powered Notebook application where users can upload PDF or CSV files and c
 
 # 📂 Project Structure
 
-\`\`\`bash
-My-notebook-LLM/
+`My-notebook-LLM/
 │
 ├── backend/
 │   ├── uploads/
@@ -87,7 +86,7 @@ My-notebook-LLM/
 │   └── .env
 │
 └── docker-compose.yml
-\`\`\`
+`
 
 ---
 
