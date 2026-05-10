@@ -48,6 +48,8 @@ let currentFileType = "";
 
 app.post("/upload", upload.single("file"), async (req, res) => {
 
+  console.log("UPLOAD HIT")
+
   try {
 
     const filePath = req.file.path;
