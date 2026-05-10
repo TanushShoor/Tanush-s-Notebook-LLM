@@ -11,17 +11,14 @@ import {
   retrieval
 } from "./index.js";
 
-app.use(express.json());
-if (!fs.existsSync("uploads")) {
-  fs.mkdirSync("uploads");
-}
-
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-
+if (!fs.existsSync("uploads")) {
+  fs.mkdirSync("uploads");
+}
 
 
 // ---------------- MULTER ----------------
