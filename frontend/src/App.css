@@ -1,0 +1,555 @@
+html,
+body,
+#root {
+
+  width: 100%;
+  height: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  overflow: hidden;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Times New Roman", serif;
+}
+
+body {
+  overflow: hidden;
+}
+
+.app-container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  position: relative;
+  background:
+    radial-gradient(circle at top left, #ff00cc55, transparent 30%),
+    radial-gradient(circle at bottom right, #3333ff55, transparent 30%),
+    radial-gradient(circle at center, #9900ff33, transparent 40%),
+    #050816;
+}
+
+.background-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(white 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 30px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+.sidebar {
+  width: 320px;
+  min-width: 320px;
+  height: calc(100vh - 40px);
+
+  padding: 25px;
+
+  position: relative;
+
+  color: white;
+
+  transition: all 0.4s ease;
+
+  overflow-y: auto;
+  overflow-x: visible;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.sidebar-header h1 {
+  font-size: 1.7rem;
+  line-height: 1.3;
+}
+
+.hide-btn,
+.show-sidebar-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.chat-section {
+  flex: 1;
+  height: calc(100vh - 40px);
+  position: relative;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80%;
+  gap: 25px;
+}
+
+.upload-icon-wrapper {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.upload-icon {
+  color: white;
+  font-size: 4rem;
+}
+
+.upload-title {
+  color: white;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.file-input {
+  color: white;
+}
+
+.upload-btn {
+  width: 180px;
+  padding: 12px;
+  border-radius: 15px;
+  border: none;
+  background: linear-gradient(
+    135deg,
+    #ff00cc,
+    #3333ff
+  );
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+.upload-btn:hover {
+  transform: scale(1.03);
+}
+
+.status-text {
+  color: #ffffffcc;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.chat-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-header {
+  color: white;
+  margin-bottom: 20px;
+}
+
+.chat-header h1 {
+  font-size: 2rem;
+}
+
+.messages-container {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.message {
+  max-width: 75%;
+  padding: 18px;
+  border-radius: 20px;
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+.message.user {
+  align-self: flex-end;
+  background: rgba(255,255,255,0.12);
+  color: white;
+}
+
+.message.assistant {
+  align-self: flex-start;
+  background: rgba(255,255,255,0.06);
+  color: #f1f1f1;
+}
+
+.message strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.welcome-box {
+  margin: auto;
+  text-align: center;
+  color: white;
+}
+
+.welcome-box h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.welcome-box p {
+  color: #cccccc;
+}
+
+.input-container {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.chat-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 1rem;
+}
+
+.chat-input::placeholder {
+  color: #cccccc;
+}
+
+.send-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(
+    135deg,
+    #ff00cc,
+    #3333ff
+  );
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.send-btn:hover {
+  transform: scale(1.08);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.2);
+  border-radius: 10px;
+}
+
+
+
+
+/*  */
+.new-notebook-btn {
+
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+
+  border: none;
+  border-radius: 14px;
+
+  background: linear-gradient(
+    135deg,
+    #ff00cc,
+    #3333ff
+  );
+
+  color: white;
+  cursor: pointer;
+}
+
+.notebook-list {
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 2px;
+
+  max-height: 300px;
+
+  overflow-y: auto;
+
+  overflow-x: visible;
+
+  padding-right: 6px;
+}
+
+.notebook-item {
+    
+    display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: 0.2s;
+  border-radius: 10px;
+  position: relative;
+}
+
+.notebook-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+
+}
+
+.notebook-item.active {
+
+  background: rgba(255,255,255,0.06);
+}
+
+
+.notebook-row {
+
+
+
+
+  gap: 1px;
+  
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.delete-btn {
+
+  background: transparent;
+  border: none;
+  color: white;
+
+  cursor: pointer;
+
+  font-size: 16px;
+}
+
+body {
+
+  font-size: 14px;
+}
+
+.sidebar h1 {
+
+  font-size: 28px;
+}
+
+.notebook-title {
+
+  flex: 1;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 120px);
+  overflow: hidden;
+}
+
+.history-section {
+
+  flex: 1;
+
+  min-height: 0;
+
+  overflow: visible;
+
+  border-bottom:
+    1px solid rgba(255,255,255,0.08);
+
+  padding-bottom: 18px;
+
+  position: relative;
+}
+
+.upload-section {
+
+  padding-top: 18px;
+
+  min-height: 260px;
+}
+
+
+.menu-wrapper {
+
+  position: relative;
+
+  margin-left: auto;
+}
+
+.menu-btn {
+
+  opacity: 0;
+
+  transition: 0.2s;
+
+  background: transparent;
+  border: none;
+
+  color: white;
+
+  font-size: 18px;
+
+  cursor: pointer;
+}
+
+.notebook-item:hover .menu-btn {
+
+  opacity: 1;
+}
+
+.menu-dropdown.floating {
+  position: fixed;
+  width: 140px;
+  background: rgb(30, 30, 40);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  overflow: hidden;
+  z-index: 999999;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.menu-dropdown.floating button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background: transparent;
+  color: white;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.menu-dropdown.floating button:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.menu-dropdown.floating .delete-item {
+  color: #ff5c5c;
+}
+
+.rename-input{
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 17px;
+  width: 100%;
+  font-family: inherit;
+}
+
+.rename-input:focus{
+  border-bottom: 1px solid #8b5cf6;
+}
+
+.rename-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font: inherit;
+  font-size: 15px;
+}
+
+.upload-dropzone {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  padding: 24px;
+
+  border-radius: 20px;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+
+  border: 1px dashed rgba(255,255,255,0.2);
+}
+
+.upload-dropzone:hover {
+
+  background: rgba(255,255,255,0.04);
+
+  transform: scale(1.01);
+}
+
+.upload-subtitle {
+
+  font-size: 0.9rem;
+
+  color: rgba(255,255,255,0.65);
+
+  text-align: center;
+}
+
+.selected-file {
+
+  margin-top: 8px;
+
+  font-size: 0.9rem;
+
+  color: #c084fc;
+
+  word-break: break-word;
+
+  text-align: center;
+}
