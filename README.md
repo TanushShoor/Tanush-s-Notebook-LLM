@@ -1,4 +1,4 @@
-# Tanush's LLM Notebook
+# Tanush's Notebook LLM
 
 An AI-powered Notebook application where users can upload PDF or CSV files and chat with their documents using Retrieval-Augmented Generation (RAG).
 
