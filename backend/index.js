@@ -2,6 +2,8 @@ import "dotenv/config";
 import { PDFLoader } from "@langchain/community/document_loaders/fs/pdf";
 import { CSVLoader } from "@langchain/community/document_loaders/fs/csv";
 // import { OpenAIEmbeddings } from "@langchain/openai";
+import { RecursiveCharacterTextSplitter } 
+from "langchain/text_splitter";
 import { OpenRouter } from "@openrouter/sdk";
 import { QdrantVectorStore } from "@langchain/qdrant";
 import { OpenAI } from "openai";
@@ -22,21 +24,37 @@ const embeddings = {
 
   embedDocuments: async (texts) => {
 
-    const vectors = [];
+  const batchSize = 5;
 
-    for (const text of texts) {
+  const batches = [];
+
+  for (let i = 0; i < texts.length; i += batchSize) {
+
+    batches.push(
+      texts.slice(i, i + batchSize)
+    );
+  }
+
+  const allVectors = [];
+
+  for (const batch of batches) {
+
+    const promises = batch.map(async (text) => {
 
       const response =
         await openrouter.embeddings.generate({
           requestBody: {
-            model: "nvidia/llama-nemotron-embed-vl-1b-v2:free",
+            model:
+              "nvidia/llama-nemotron-embed-vl-1b-v2:free",
 
             input: [
               {
                 content: [
                   {
                     type: "text",
-                    text: String(text).slice(0, 1000),
+
+                    text: String(text)
+                      .slice(0, 1000),
                   },
                 ],
               },
@@ -46,11 +64,17 @@ const embeddings = {
           },
         });
 
-      vectors.push(response.data[0].embedding);
-    }
+      return response.data[0].embedding;
+    });
 
-    return vectors;
-  },
+    const vectors =
+      await Promise.all(promises);
+
+    allVectors.push(...vectors);
+  }
+
+  return allVectors;
+},
 
   embedQuery: async (text) => {
 
@@ -84,18 +108,31 @@ async function indexingPDF(filePath, notebookId) {
   // chunking
   const docs = await loader.load();
 
+  const splitter =
+  new RecursiveCharacterTextSplitter({
+    chunkSize: 1000,
+    chunkOverlap: 200,
+  });
+
+const splitDocs =
+  await splitter.splitDocuments(docs);
+
   // embeddings
   //    const embeddings = new OpenAIEmbeddings({
   //        model: "text-embedding-3-large",
   //    });
 
-  const vectoreStore = await QdrantVectorStore.fromDocuments(docs, embeddings, {
+  const vectoreStore = await QdrantVectorStore.fromDocuments(splitDocs, embeddings, {
     url: process.env.QDRANT_URL,
     apiKey: process.env.QDRANT_API_KEY, 
     collectionName: notebookId,
   });
 
   console.log("Indexeding Completed");
+  console.log(
+  "Total chunks:",
+  splitDocs.length
+);
 }
 
 // indexingPDF();
@@ -107,9 +144,17 @@ async function indexingPDF(filePath, notebookId) {
     //   const loader = new CSVLoader("language-locales.csv");
 
     const docs = await loader.load();
+    const splitter =
+  new RecursiveCharacterTextSplitter({
+    chunkSize: 1000,
+    chunkOverlap: 200,
+  });
+
+const splitDocs =
+  await splitter.splitDocuments(docs);
 
     const vectoreStore = await QdrantVectorStore.fromDocuments(
-      docs,
+      splitDocs,
       embeddings,
       {
         url: process.env.QDRANT_URL,
