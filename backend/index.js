@@ -1,9 +1,8 @@
 import "dotenv/config";
+import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 import { PDFLoader } from "@langchain/community/document_loaders/fs/pdf";
 import { CSVLoader } from "@langchain/community/document_loaders/fs/csv";
 // import { OpenAIEmbeddings } from "@langchain/openai";
-import { RecursiveCharacterTextSplitter } 
-from "langchain/text_splitter";
 import { OpenRouter } from "@openrouter/sdk";
 import { QdrantVectorStore } from "@langchain/qdrant";
 import { OpenAI } from "openai";
